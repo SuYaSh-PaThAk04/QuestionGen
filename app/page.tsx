@@ -227,7 +227,7 @@ export default function Home() {
                   <div className="px-4 py-3 text-xs font-medium" style={{ background: "var(--bg-elevated)", color: "var(--text-muted)", borderBottom: "1px solid var(--border-subtle)" }}>
                     Question bank breakdown
                   </div>
-                  <div className="divide-y" style={{ divideColor: "var(--border-subtle)" }}>
+                  <div className="divide-y divide-[var(--border-subtle)]">
                     {SECTIONS.map((sec, si) => {
                       const colors = ["var(--electric)", "var(--gold)", "var(--jade)"];
                       return (
