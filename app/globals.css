@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-base: #080A0C;
+  --bg-surface: #0D1117;
+  --bg-elevated: #131920;
+  --bg-hover: #1A2332;
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-medium: rgba(255,255,255,0.10);
+  --border-strong: rgba(255,255,255,0.16);
+  --gold: #E8C547;
+  --gold-dim: rgba(232,197,71,0.15);
+  --electric: #4CC9F0;
+  --electric-dim: rgba(76,201,240,0.12);
+  --jade: #4ADE80;
+  --jade-dim: rgba(74,222,128,0.12);
+  --rose: #FB7185;
+  --rose-dim: rgba(251,113,133,0.12);
+  --text-primary: #F0EDE6;
+  --text-secondary: #8A95A3;
+  --text-muted: #4A5568;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+/* Shimmer */
+.shimmer-text {
+  background: linear-gradient(90deg, var(--text-secondary) 0%, var(--gold) 40%, var(--electric) 60%, var(--text-secondary) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Card glass */
+.glass-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+}
+
+/* Glow effects */
+.glow-gold { box-shadow: 0 0 40px rgba(232,197,71,0.08), 0 0 80px rgba(232,197,71,0.04); }
+.glow-electric { box-shadow: 0 0 40px rgba(76,201,240,0.08), 0 0 80px rgba(76,201,240,0.04); }
+
+/* Drop zone */
+.drop-zone-active {
+  border-color: var(--gold) !important;
+  background: var(--gold-dim) !important;
+}
+
+/* Animate children */
+.stagger > * {
+  animation: fadeUp 0.5s ease forwards;
+  opacity: 0;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.stagger > *:nth-child(3) { animation-delay: 0.19s; }
+.stagger > *:nth-child(4) { animation-delay: 0.26s; }
+.stagger > *:nth-child(5) { animation-delay: 0.33s; }
+.stagger > *:nth-child(6) { animation-delay: 0.40s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Orb background */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
+  animation: pulse2 8s ease-in-out infinite;
+}
+@keyframes pulse2 {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.30; }
+}
